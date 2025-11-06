@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 import os
+import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -79,21 +80,17 @@ WSGI_APPLICATION = 'blogs.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# Use PostgreSQL on Render, SQLite for local development
 if os.environ.get('DATABASE_URL'):
-    # Production database (PostgreSQL on Render)
+    # Production: Parse DATABASE_URL automatically
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ.get('PGDATABASE'),
-            'USER': os.environ.get('PGUSER'),
-            'PASSWORD': os.environ.get('PGPASSWORD'),
-            'HOST': os.environ.get('PGHOST'),
-            'PORT': os.environ.get('PGPORT', '5432'),
-        }
+        'default': dj_database_url.config(
+            default=os.environ.get('DATABASE_URL'),
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
     }
 else:
-    # Local development database (SQLite)
+    # Local development: SQLite
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
