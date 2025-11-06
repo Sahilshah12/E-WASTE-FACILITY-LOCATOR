@@ -1,0 +1,17 @@
+# E-Waste Facility Locator - Django Project Requirements
+# Python 3.x required
+
+# Core Django Framework
+Django==5.2.6
+
+# Database support
+asgiref==3.9.2
+sqlparse==0.5.3
+
+# Timezone support
+tzdata==2025.2
+
+# Additional useful packages (optional but recommended)
+# Pillow==10.1.0  # For image handling if needed
+# django-crispy-forms==2.1  # For better form rendering
+# python-decouple==3.8  # For environment variable management

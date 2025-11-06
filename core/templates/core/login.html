@@ -1,0 +1,65 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-7">
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-success text-white text-center py-4">
+                        <h3 class="mb-0">
+                            <i class="bi bi-box-arrow-in-right"></i> Login
+                        </h3>
+                    </div>
+                    <div class="card-body p-5">
+                        <p class="text-center text-muted mb-4">Welcome back! Please login to your account.</p>
+                        
+                        <form method="post" action="{% url 'core:login' %}">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="username" class="form-label">
+                                    <i class="bi bi-person"></i> Username
+                                </label>
+                                <input type="text" class="form-control form-control-lg" 
+                                       id="username" name="username" 
+                                       placeholder="Enter your username" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="password" class="form-label">
+                                    <i class="bi bi-lock"></i> Password
+                                </label>
+                                <input type="password" class="form-control form-control-lg" 
+                                       id="password" name="password" 
+                                       placeholder="Enter your password" required>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-success btn-lg">
+                                    <i class="bi bi-box-arrow-in-right"></i> Login
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center py-3">
+                        <p class="mb-0">
+                            Don't have an account? 
+                            <a href="{% url 'core:register' %}" class="text-success fw-bold">
+                                Register here
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Info Card -->
+                <div class="card mt-4 border-0 bg-light">
+                    <div class="card-body text-center">
+                        <i class="bi bi-info-circle text-primary"></i>
+                        <p class="mb-0 small">Login to access your dashboard, track your recycling stats, and earn points!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

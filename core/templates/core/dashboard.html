@@ -1,0 +1,230 @@
+{% extends 'core/base.html' %}
+
+{% block title %}My Dashboard{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h1 class="mb-4">
+            <i class="bi bi-speedometer2 text-info"></i> My Dashboard
+        </h1>
+        <p class="lead mb-4">Welcome back, <strong>{{ user.username }}</strong>! Track your recycling impact.</p>
+
+        <!-- Statistics Cards -->
+        <div class="row g-4 mb-5">
+            <div class="col-md-6 col-lg-3">
+                <div class="card border-0 shadow-sm bg-primary bg-gradient text-white">
+                    <div class="card-body text-center">
+                        <i class="bi bi-trophy" style="font-size: 3rem;"></i>
+                        <h3 class="mt-3 mb-1">{{ profile.points }}</h3>
+                        <p class="mb-0">Total Points</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card border-0 shadow-sm bg-success bg-gradient text-white">
+                    <div class="card-body text-center">
+                        <i class="bi bi-recycle" style="font-size: 3rem;"></i>
+                        <h3 class="mt-3 mb-1">{{ profile.total_recycled }}</h3>
+                        <p class="mb-0">Devices Recycled</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card border-0 shadow-sm bg-info bg-gradient text-white">
+                    <div class="card-body text-center">
+                        <i class="bi bi-cloud-check" style="font-size: 3rem;"></i>
+                        <h3 class="mt-3 mb-1">{{ profile.co2_saved }} kg</h3>
+                        <p class="mb-0">CO₂ Saved</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card border-0 shadow-sm bg-warning bg-gradient text-white">
+                    <div class="card-body text-center">
+                        <i class="bi bi-award" style="font-size: 3rem;"></i>
+                        <h3 class="mt-3 mb-1">#{{ user_rank }}</h3>
+                        <p class="mb-0">Your Rank</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Recycle Device Form -->
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0"><i class="bi bi-plus-circle"></i> Recycle a Device</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Simulate recycling a device to earn points and contribute to the environment!</p>
+                        <form method="post" action="{% url 'core:dashboard' %}">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="{{ recycle_form.device.id_for_label }}" class="form-label">Choose Device</label>
+                                {{ recycle_form.device }}
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">
+                                <i class="bi bi-recycle"></i> Recycle Now
+                            </button>
+                        </form>
+                        <hr class="my-3">
+                        <div class="d-grid">
+                            <a href="{% url 'core:estimate' %}" class="btn btn-outline-primary">
+                                <i class="bi bi-search"></i> Estimate Device Value First
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Impact Summary -->
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0"><i class="bi bi-graph-up"></i> Your Impact</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="mb-3">Environmental Contribution:</h6>
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span><i class="bi bi-tree text-success"></i> Trees Saved (approx)</span>
+                                <strong>{{ profile.total_recycled|add:"0"|floatformat:0 }}</strong>
+                            </div>
+                            <div class="progress" style="height: 20px;">
+                                <div class="progress-bar bg-success" role="progressbar" 
+                                     style="width: {% widthratio profile.total_recycled 50 100 %}%">
+                                </div>
+                            </div>
+                            <small class="text-muted">Target: 50 devices</small>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span><i class="bi bi-lightning text-warning"></i> Energy Saved (kWh)</span>
+                                <strong>{{ profile.points|floatformat:0 }}</strong>
+                            </div>
+                            <div class="progress" style="height: 20px;">
+                                <div class="progress-bar bg-warning" role="progressbar" 
+                                     style="width: {% widthratio profile.points 500 100 %}%">
+                                </div>
+                            </div>
+                            <small class="text-muted">Target: 500 points</small>
+                        </div>
+
+                        <div class="alert alert-success mb-0">
+                            <i class="bi bi-check-circle"></i> 
+                            Great work! You've prevented <strong>{{ profile.total_recycled }}</strong> device(s) from ending up in landfills.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leaderboard -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-warning text-dark">
+                        <h5 class="mb-0"><i class="bi bi-trophy-fill"></i> Top Recyclers Leaderboard</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>User</th>
+                                        <th>Points</th>
+                                        <th>Devices Recycled</th>
+                                        <th>CO₂ Saved (kg)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for leader in leaderboard %}
+                                    <tr {% if leader.user == user %}class="table-primary"{% endif %}>
+                                        <td>
+                                            {% if forloop.counter == 1 %}
+                                                <i class="bi bi-trophy-fill text-warning"></i>
+                                            {% elif forloop.counter == 2 %}
+                                                <i class="bi bi-trophy-fill text-secondary"></i>
+                                            {% elif forloop.counter == 3 %}
+                                                <i class="bi bi-trophy-fill text-danger"></i>
+                                            {% else %}
+                                                {{ forloop.counter }}
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <strong>{{ leader.user.username }}</strong>
+                                            {% if leader.user == user %}
+                                                <span class="badge bg-primary">You</span>
+                                            {% endif %}
+                                        </td>
+                                        <td><span class="badge bg-success">{{ leader.points }}</span></td>
+                                        <td>{{ leader.total_recycled }}</td>
+                                        <td>{{ leader.co2_saved }}</td>
+                                    </tr>
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="5" class="text-center text-muted">No data available yet</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h4 class="mb-3">Quick Actions</h4>
+            </div>
+            <div class="col-md-4 mb-3">
+                <a href="{% url 'core:locator' %}" class="card text-decoration-none hover-card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-geo-alt-fill text-success" style="font-size: 2.5rem;"></i>
+                        <h5 class="mt-3">Find Facilities</h5>
+                        <p class="text-muted mb-0">Locate nearby recycling centers</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 mb-3">
+                <a href="{% url 'core:estimate' %}" class="card text-decoration-none hover-card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-calculator-fill text-primary" style="font-size: 2.5rem;"></i>
+                        <h5 class="mt-3">Estimate Value</h5>
+                        <p class="text-muted mb-0">Check your device's worth</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 mb-3">
+                <a href="{% url 'core:learn' %}" class="card text-decoration-none hover-card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-lightbulb-fill text-warning" style="font-size: 2.5rem;"></i>
+                        <h5 class="mt-3">Learn More</h5>
+                        <p class="text-muted mb-0">Understand e-waste impact</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .hover-card {
+        transition: all 0.3s ease;
+        border: 1px solid #dee2e6;
+    }
+    .hover-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        border-color: #28a745;
+    }
+</style>
+{% endblock %}

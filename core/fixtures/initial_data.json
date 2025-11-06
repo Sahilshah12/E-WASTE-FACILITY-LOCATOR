@@ -1,0 +1,236 @@
+[
+    {
+        "model": "core.facility",
+        "pk": 1,
+        "fields": {
+            "name": "Green E-Waste Recyclers Delhi",
+            "address": "Plot No. 45, Okhla Industrial Area, Phase III",
+            "city": "Delhi",
+            "pincode": "110020",
+            "latitude": "28.5355",
+            "longitude": "77.2635",
+            "contact": "+91-11-26814567",
+            "accepted_items": "Laptops, Smartphones, Tablets, Desktops, Monitors, Keyboards, Mice, Printers, Cables",
+            "created_at": "2025-01-01T10:00:00Z",
+            "updated_at": "2025-01-01T10:00:00Z"
+        }
+    },
+    {
+        "model": "core.facility",
+        "pk": 2,
+        "fields": {
+            "name": "EcoRecycle Mumbai Center",
+            "address": "Bandra Kurla Complex, Unit 23B, 5th Floor",
+            "city": "Mumbai",
+            "pincode": "400051",
+            "latitude": "19.0596",
+            "longitude": "72.8656",
+            "contact": "+91-22-26543210",
+            "accepted_items": "All types of electronic devices, Circuit boards, Power adapters, Batteries",
+            "created_at": "2025-01-01T10:00:00Z",
+            "updated_at": "2025-01-01T10:00:00Z"
+        }
+    },
+    {
+        "model": "core.facility",
+        "pk": 3,
+        "fields": {
+            "name": "Tech Waste Solutions Bangalore",
+            "address": "Whitefield Main Road, Mahadevapura",
+            "city": "Bangalore",
+            "pincode": "560048",
+            "latitude": "12.9897",
+            "longitude": "77.7503",
+            "contact": "+91-80-25678934",
+            "accepted_items": "Computers, Mobile phones, TVs, Air conditioners, Refrigerators, Washing machines",
+            "created_at": "2025-01-01T10:00:00Z",
+            "updated_at": "2025-01-01T10:00:00Z"
+        }
+    },
+    {
+        "model": "core.componentinfo",
+        "pk": 1,
+        "fields": {
+            "component": "Lead",
+            "icon": "⚠️",
+            "found_in": "CRT monitors, Batteries, Circuit boards, Solder",
+            "health_effect": "Lead exposure can cause brain damage, kidney damage, anemia, and developmental issues in children. It affects the nervous system and can lead to learning disabilities.",
+            "environmental_effect": "Lead contaminates soil and water, persists in the environment for decades, and accumulates in plants and animals, entering the food chain.",
+            "created_at": "2025-01-01T10:00:00Z"
+        }
+    },
+    {
+        "model": "core.componentinfo",
+        "pk": 2,
+        "fields": {
+            "component": "Mercury",
+            "icon": "☠️",
+            "found_in": "LCD screens, Fluorescent lamps, Batteries, Switches",
+            "health_effect": "Mercury causes neurological damage, kidney problems, respiratory issues, and can lead to tremors, insomnia, and memory loss. Particularly dangerous for pregnant women.",
+            "environmental_effect": "Mercury bioaccumulates in aquatic ecosystems, converting to toxic methylmercury. It poisons fish and wildlife, contaminating water bodies for generations.",
+            "created_at": "2025-01-01T10:00:00Z"
+        }
+    },
+    {
+        "model": "core.componentinfo",
+        "pk": 3,
+        "fields": {
+            "component": "Cadmium",
+            "icon": "☢️",
+            "found_in": "Rechargeable batteries, Circuit boards, Semiconductors, Chip resistors",
+            "health_effect": "Cadmium causes lung cancer, kidney disease, bone fragility, and respiratory problems. Long-term exposure leads to organ damage and weakened immune system.",
+            "environmental_effect": "Cadmium persists in soil for decades, contaminates crops and groundwater, and is toxic to plants, animals, and microorganisms.",
+            "created_at": "2025-01-01T10:00:00Z"
+        }
+    },
+    {
+        "model": "core.device",
+        "pk": 1,
+        "fields": {
+            "brand": "Apple",
+            "model_name": "iPhone 12",
+            "device_type": "smartphone",
+            "gold_mg": "35.00",
+            "copper_mg": "15000.00",
+            "silver_mg": "350.00",
+            "estimated_value": "450.00",
+            "created_at": "2025-01-01T10:00:00Z",
+            "updated_at": "2025-01-01T10:00:00Z"
+        }
+    },
+    {
+        "model": "core.device",
+        "pk": 2,
+        "fields": {
+            "brand": "Samsung",
+            "model_name": "Galaxy S21",
+            "device_type": "smartphone",
+            "gold_mg": "30.00",
+            "copper_mg": "12000.00",
+            "silver_mg": "280.00",
+            "estimated_value": "380.00",
+            "created_at": "2025-01-01T10:00:00Z",
+            "updated_at": "2025-01-01T10:00:00Z"
+        }
+    },
+    {
+        "model": "core.device",
+        "pk": 3,
+        "fields": {
+            "brand": "Dell",
+            "model_name": "Latitude 5420",
+            "device_type": "laptop",
+            "gold_mg": "120.00",
+            "copper_mg": "45000.00",
+            "silver_mg": "800.00",
+            "estimated_value": "1200.00",
+            "created_at": "2025-01-01T10:00:00Z",
+            "updated_at": "2025-01-01T10:00:00Z"
+        }
+    },
+    {
+        "model": "core.device",
+        "pk": 4,
+        "fields": {
+            "brand": "HP",
+            "model_name": "ProBook 450",
+            "device_type": "laptop",
+            "gold_mg": "100.00",
+            "copper_mg": "38000.00",
+            "silver_mg": "650.00",
+            "estimated_value": "950.00",
+            "created_at": "2025-01-01T10:00:00Z",
+            "updated_at": "2025-01-01T10:00:00Z"
+        }
+    },
+    {
+        "model": "core.device",
+        "pk": 5,
+        "fields": {
+            "brand": "Apple",
+            "model_name": "iPad Pro 11",
+            "device_type": "tablet",
+            "gold_mg": "45.00",
+            "copper_mg": "18000.00",
+            "silver_mg": "420.00",
+            "estimated_value": "550.00",
+            "created_at": "2025-01-01T10:00:00Z",
+            "updated_at": "2025-01-01T10:00:00Z"
+        }
+    },
+    {
+        "model": "core.device",
+        "pk": 6,
+        "fields": {
+            "brand": "Lenovo",
+            "model_name": "ThinkPad X1 Carbon",
+            "device_type": "laptop",
+            "gold_mg": "130.00",
+            "copper_mg": "48000.00",
+            "silver_mg": "850.00",
+            "estimated_value": "1350.00",
+            "created_at": "2025-01-01T10:00:00Z",
+            "updated_at": "2025-01-01T10:00:00Z"
+        }
+    },
+    {
+        "model": "core.device",
+        "pk": 7,
+        "fields": {
+            "brand": "OnePlus",
+            "model_name": "OnePlus 9 Pro",
+            "device_type": "smartphone",
+            "gold_mg": "28.00",
+            "copper_mg": "11000.00",
+            "silver_mg": "260.00",
+            "estimated_value": "350.00",
+            "created_at": "2025-01-01T10:00:00Z",
+            "updated_at": "2025-01-01T10:00:00Z"
+        }
+    },
+    {
+        "model": "core.device",
+        "pk": 8,
+        "fields": {
+            "brand": "Samsung",
+            "model_name": "Galaxy Tab S7",
+            "device_type": "tablet",
+            "gold_mg": "40.00",
+            "copper_mg": "16000.00",
+            "silver_mg": "380.00",
+            "estimated_value": "480.00",
+            "created_at": "2025-01-01T10:00:00Z",
+            "updated_at": "2025-01-01T10:00:00Z"
+        }
+    },
+    {
+        "model": "core.device",
+        "pk": 9,
+        "fields": {
+            "brand": "Asus",
+            "model_name": "ROG Strix G15",
+            "device_type": "laptop",
+            "gold_mg": "140.00",
+            "copper_mg": "52000.00",
+            "silver_mg": "920.00",
+            "estimated_value": "1500.00",
+            "created_at": "2025-01-01T10:00:00Z",
+            "updated_at": "2025-01-01T10:00:00Z"
+        }
+    },
+    {
+        "model": "core.device",
+        "pk": 10,
+        "fields": {
+            "brand": "Xiaomi",
+            "model_name": "Mi 11X Pro",
+            "device_type": "smartphone",
+            "gold_mg": "25.00",
+            "copper_mg": "10000.00",
+            "silver_mg": "240.00",
+            "estimated_value": "320.00",
+            "created_at": "2025-01-01T10:00:00Z",
+            "updated_at": "2025-01-01T10:00:00Z"
+        }
+    }
+]

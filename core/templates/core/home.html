@@ -1,0 +1,258 @@
+﻿{% extends 'core/base.html' %}
+
+{% block title %}Home - E-Waste Facility Locator{% endblock %}
+
+{% block extra_css %}
+<style>
+    .hero-section {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        position: relative;
+        overflow: hidden;
+        min-height: 80vh;
+    }
+    .hero-icon {
+        animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+    }
+    .stat-card:hover {
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+    }
+    .feature-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.2) !important;
+        transition: all 0.4s ease;
+    }
+    .feature-icon {
+        transition: transform 0.3s ease;
+    }
+    .feature-card:hover .feature-icon {
+        transform: rotate(360deg) scale(1.2);
+    }
+    .btn-glow {
+        box-shadow: 0 0 20px rgba(40, 167, 69, 0.5);
+    }
+    .gradient-text {
+        background: linear-gradient(45deg, #28a745, #20c997, #17a2b8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="hero-section text-white py-5 d-flex align-items-center">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 py-5">
+                <h1 class="display-3 fw-bold mb-4">
+                    <i class="bi bi-recycle"></i> Smart <span class="gradient-text text-white">E-Waste</span> Management
+                </h1>
+                <p class="lead mb-4 fs-4">
+                    Find nearby recycling facilities, learn about e-waste impact, 
+                    and earn rewards for responsible disposal.
+                </p>
+                <div class="d-flex gap-3 flex-wrap mb-4">
+                    <a href="{% url 'core:locator' %}" class="btn btn-light btn-lg btn-glow px-4 py-3">
+                        <i class="bi bi-geo-alt"></i> Find Facilities
+                    </a>
+                    <a href="{% url 'core:estimate' %}" class="btn btn-outline-light btn-lg px-4 py-3">
+                        <i class="bi bi-calculator"></i> Estimate Value
+                    </a>
+                </div>
+                <div class="d-flex gap-4 mt-4">
+                    <div class="text-center">
+                        <h2 class="fw-bold">{{ total_facilities }}+</h2>
+                        <small>Facilities</small>
+                    </div>
+                    <div class="text-center">
+                        <h2 class="fw-bold">{{ total_devices }}+</h2>
+                        <small>Devices</small>
+                    </div>
+                    <div class="text-center">
+                        <h2 class="fw-bold">{{ total_users }}+</h2>
+                        <small>Users</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <i class="bi bi-laptop hero-icon" style="font-size: 250px; opacity: 0.9;"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5 fw-bold">Why Choose <span class="text-success">E-Waste Locator</span>?</h2>
+        <div class="row text-center g-4">
+            <div class="col-md-4">
+                <div class="card border-0 shadow stat-card h-100">
+                    <div class="card-body p-4">
+                        <i class="bi bi-building text-success" style="font-size: 4rem;"></i>
+                        <h2 class="mt-3 fw-bold text-success">{{ total_facilities }}</h2>
+                        <h5 class="text-muted">Verified Facilities</h5>
+                        <p class="text-muted small">Certified recycling centers across major cities</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow stat-card h-100">
+                    <div class="card-body p-4">
+                        <i class="bi bi-phone text-primary" style="font-size: 4rem;"></i>
+                        <h2 class="mt-3 fw-bold text-primary">{{ total_devices }}</h2>
+                        <h5 class="text-muted">Devices Catalogued</h5>
+                        <p class="text-muted small">Complete database with metal recovery values</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow stat-card h-100">
+                    <div class="card-body p-4">
+                        <i class="bi bi-people text-info" style="font-size: 4rem;"></i>
+                        <h2 class="mt-3 fw-bold text-info">{{ total_users }}</h2>
+                        <h5 class="text-muted">Active Users</h5>
+                        <p class="text-muted small">Growing community of eco-conscious recyclers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-white">
+    <div class="container">
+        <h2 class="text-center mb-3 fw-bold">Our <span class="text-success">Features</span></h2>
+        <p class="text-center text-muted mb-5">Everything you need for responsible e-waste management</p>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border-success feature-card">
+                    <div class="card-body text-center p-4">
+                        <i class="bi bi-map text-success feature-icon" style="font-size: 3.5rem;"></i>
+                        <h5 class="card-title mt-3 fw-bold">Facility Locator</h5>
+                        <p class="card-text">Find certified e-waste recycling centers near you with interactive maps.</p>
+                        <a href="{% url 'core:locator' %}" class="btn btn-outline-success btn-sm mt-2">
+                            Explore <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border-warning feature-card">
+                    <div class="card-body text-center p-4">
+                        <i class="bi bi-exclamation-triangle text-warning feature-icon" style="font-size: 3.5rem;"></i>
+                        <h5 class="card-title mt-3 fw-bold">Learn About E-Waste</h5>
+                        <p class="card-text">Discover the harmful components in electronics and their environmental impact.</p>
+                        <a href="{% url 'core:learn' %}" class="btn btn-outline-warning btn-sm mt-2">
+                            Learn More <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border-primary feature-card">
+                    <div class="card-body text-center p-4">
+                        <i class="bi bi-coin text-primary feature-icon" style="font-size: 3.5rem;"></i>
+                        <h5 class="card-title mt-3 fw-bold">Value Estimator</h5>
+                        <p class="card-text">Estimate the metal content and recovery value of your old devices.</p>
+                        <a href="{% url 'core:estimate' %}" class="btn btn-outline-primary btn-sm mt-2">
+                            Calculate <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border-info feature-card">
+                    <div class="card-body text-center p-4">
+                        <i class="bi bi-trophy text-info feature-icon" style="font-size: 3.5rem;"></i>
+                        <h5 class="card-title mt-3 fw-bold">Earn Rewards</h5>
+                        <p class="card-text">Get points for recycling and track your environmental contribution.</p>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'core:dashboard' %}" class="btn btn-outline-info btn-sm mt-2">
+                            Dashboard <i class="bi bi-arrow-right"></i>
+                        </a>
+                        {% else %}
+                        <a href="{% url 'core:register' %}" class="btn btn-outline-info btn-sm mt-2">
+                            Join Now <i class="bi bi-arrow-right"></i>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-success text-white">
+    <div class="container text-center">
+        <h2 class="mb-4 fw-bold display-5">Ready to Make a Difference?</h2>
+        <p class="lead mb-4">Join thousands of users making the planet greener, one device at a time.</p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+            {% if not user.is_authenticated %}
+            <a href="{% url 'core:register' %}" class="btn btn-light btn-lg px-5 py-3">
+                <i class="bi bi-person-plus"></i> Sign Up Free
+            </a>
+            {% endif %}
+            <a href="{% url 'core:locator' %}" class="btn btn-outline-light btn-lg px-5 py-3">
+                <i class="bi bi-geo-alt"></i> Find Facilities
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h2 class="mb-4 fw-bold">Why <span class="text-success">E-Waste Management</span> Matters</h2>
+                <div class="card border-0 shadow mb-3">
+                    <div class="card-body">
+                        <i class="bi bi-check-circle-fill text-success fs-3"></i>
+                        <strong class="fs-5">Toxic Materials</strong>
+                        <p class="mb-0 mt-2">E-waste contains lead, mercury, and cadmium that harm health and environment.</p>
+                    </div>
+                </div>
+                <div class="card border-0 shadow mb-3">
+                    <div class="card-body">
+                        <i class="bi bi-check-circle-fill text-success fs-3"></i>
+                        <strong class="fs-5">Resource Recovery</strong>
+                        <p class="mb-0 mt-2">Recycling recovers valuable metals like gold, silver, and copper.</p>
+                    </div>
+                </div>
+                <div class="card border-0 shadow mb-3">
+                    <div class="card-body">
+                        <i class="bi bi-check-circle-fill text-success fs-3"></i>
+                        <strong class="fs-5">Reduce Carbon Footprint</strong>
+                        <p class="mb-0 mt-2">Proper disposal reduces CO emissions and pollution.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-lg">
+                    <div class="card-body p-5 bg-success text-white">
+                        <h4 class="mb-4 fw-bold"><i class="bi bi-info-circle-fill"></i> Did You Know?</h4>
+                        <div class="mb-4">
+                            <h2 class="display-4 fw-bold">53.6M</h2>
+                            <p class="fs-5 mb-0">tonnes of e-waste generated globally in 2019</p>
+                        </div>
+                        <div class="mb-4">
+                            <h2 class="display-4 fw-bold">17.4%</h2>
+                            <p class="fs-5 mb-0">was properly recycled</p>
+                        </div>
+                        <div class="mb-4">
+                            <h2 class="display-4 fw-bold">2M</h2>
+                            <p class="fs-5 mb-0">tonnes/year growth rate</p>
+                        </div>
+                        <hr class="bg-white">
+                        <p class="mb-0 small"><i class="bi bi-book"></i> Source: UN Global E-waste Monitor 2020</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

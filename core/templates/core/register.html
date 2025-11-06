@@ -1,0 +1,125 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-primary text-white text-center py-4">
+                        <h3 class="mb-0">
+                            <i class="bi bi-person-plus"></i> Create Account
+                        </h3>
+                    </div>
+                    <div class="card-body p-5">
+                        <p class="text-center text-muted mb-4">Join us and start making a difference!</p>
+                        
+                        <form method="post" action="{% url 'core:register' %}">
+                            {% csrf_token %}
+                            
+                            <div class="mb-3">
+                                <label for="{{ form.username.id_for_label }}" class="form-label">
+                                    <i class="bi bi-person"></i> Username *
+                                </label>
+                                {{ form.username }}
+                                {% if form.username.errors %}
+                                    <div class="text-danger small mt-1">{{ form.username.errors }}</div>
+                                {% endif %}
+                                <small class="form-text text-muted">
+                                    {{ form.username.help_text }}
+                                </small>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="{{ form.email.id_for_label }}" class="form-label">
+                                    <i class="bi bi-envelope"></i> Email Address *
+                                </label>
+                                {{ form.email }}
+                                {% if form.email.errors %}
+                                    <div class="text-danger small mt-1">{{ form.email.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.first_name.id_for_label }}" class="form-label">
+                                        First Name
+                                    </label>
+                                    {{ form.first_name }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.last_name.id_for_label }}" class="form-label">
+                                        Last Name
+                                    </label>
+                                    {{ form.last_name }}
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="{{ form.password1.id_for_label }}" class="form-label">
+                                    <i class="bi bi-lock"></i> Password *
+                                </label>
+                                {{ form.password1 }}
+                                {% if form.password1.errors %}
+                                    <div class="text-danger small mt-1">{{ form.password1.errors }}</div>
+                                {% endif %}
+                                <small class="form-text text-muted">
+                                    {{ form.password1.help_text }}
+                                </small>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="{{ form.password2.id_for_label }}" class="form-label">
+                                    <i class="bi bi-lock-fill"></i> Confirm Password *
+                                </label>
+                                {{ form.password2 }}
+                                {% if form.password2.errors %}
+                                    <div class="text-danger small mt-1">{{ form.password2.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            {% if form.non_field_errors %}
+                                <div class="alert alert-danger">
+                                    {{ form.non_field_errors }}
+                                </div>
+                            {% endif %}
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="bi bi-person-plus"></i> Create Account
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center py-3">
+                        <p class="mb-0">
+                            Already have an account? 
+                            <a href="{% url 'core:login' %}" class="text-primary fw-bold">
+                                Login here
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Benefits Card -->
+                <div class="card mt-4 border-0 bg-light">
+                    <div class="card-body">
+                        <h6 class="text-center mb-3">
+                            <i class="bi bi-star-fill text-warning"></i> Membership Benefits
+                        </h6>
+                        <ul class="mb-0">
+                            <li>Track your recycling statistics</li>
+                            <li>Earn points for every device recycled</li>
+                            <li>See your environmental impact (CO₂ saved)</li>
+                            <li>Compete on the leaderboard</li>
+                            <li>Access exclusive recycling tips</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

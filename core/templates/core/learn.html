@@ -1,0 +1,146 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Learn About E-Waste{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h1 class="mb-4">
+            <i class="bi bi-lightbulb-fill text-warning"></i> Learn About E-Waste
+        </h1>
+        <p class="lead mb-5">Understand the harmful components in electronic waste and their impact</p>
+
+        {% if component %}
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Component Card -->
+                <div class="card shadow-lg border-0 mb-4">
+                    <div class="card-header bg-warning text-white py-3">
+                        <h3 class="mb-0">
+                            <span style="font-size: 2rem;">{{ component.icon }}</span>
+                            {{ component.component }}
+                        </h3>
+                    </div>
+                    <div class="card-body p-4">
+                        <!-- Found In -->
+                        <div class="mb-4">
+                            <h5 class="text-primary">
+                                <i class="bi bi-devices"></i> Found In:
+                            </h5>
+                            <p class="text-muted fs-6">{{ component.found_in }}</p>
+                        </div>
+
+                        <hr>
+
+                        <!-- Health Effects -->
+                        <div class="mb-4">
+                            <h5 class="text-danger">
+                                <i class="bi bi-heart-pulse"></i> Health Effects:
+                            </h5>
+                            <div class="alert alert-danger" role="alert">
+                                {{ component.health_effect }}
+                            </div>
+                        </div>
+
+                        <!-- Environmental Effects -->
+                        <div class="mb-4">
+                            <h5 class="text-success">
+                                <i class="bi bi-globe"></i> Environmental Impact:
+                            </h5>
+                            <div class="alert alert-warning" role="alert">
+                                {{ component.environmental_effect }}
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex gap-3 flex-wrap justify-content-center mt-4">
+                            <a href="{% url 'core:learn' %}" class="btn btn-warning btn-lg">
+                                <i class="bi bi-shuffle"></i> Show Another Fact
+                            </a>
+                            <a href="{% url 'core:locator' %}" class="btn btn-outline-success btn-lg">
+                                <i class="bi bi-recycle"></i> Find Recycling Centers
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Box -->
+                <div class="alert alert-info">
+                    <h6><i class="bi bi-info-circle"></i> Did You Know?</h6>
+                    <p class="mb-0">Proper e-waste recycling prevents these harmful components from entering landfills and contaminating soil and water supplies. Always dispose of electronics at certified facilities.</p>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="alert alert-warning">
+                    <h5><i class="bi bi-exclamation-triangle"></i> No Information Available</h5>
+                    <p class="mb-0">No component information has been added yet. Please check back later or contact an administrator.</p>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="{% url 'core:home' %}" class="btn btn-primary">
+                        <i class="bi bi-house"></i> Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Educational Resources Section -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3 class="mb-4 text-center">Why E-Waste Education Matters</h3>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-danger">
+                    <div class="card-body text-center">
+                        <i class="bi bi-exclamation-octagon text-danger" style="font-size: 3rem;"></i>
+                        <h5 class="mt-3">Toxic Components</h5>
+                        <p>Electronics contain lead, mercury, cadmium, and other hazardous materials that harm health.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-success">
+                    <div class="card-body text-center">
+                        <i class="bi bi-shield-check text-success" style="font-size: 3rem;"></i>
+                        <h5 class="mt-3">Safe Disposal</h5>
+                        <p>Certified recyclers safely extract and dispose of harmful materials following environmental regulations.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-primary">
+                    <div class="card-body text-center">
+                        <i class="bi bi-globe2 text-primary" style="font-size: 3rem;"></i>
+                        <h5 class="mt-3">Global Impact</h5>
+                        <p>Proper e-waste management reduces pollution, conserves resources, and protects ecosystems.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Components Counter -->
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <p class="text-muted">
+                    <i class="bi bi-database"></i> 
+                    Our database contains information on <strong>{{ total_components }}</strong> harmful components
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .card {
+        transition: transform 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+    }
+</style>
+{% endblock %}
