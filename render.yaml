@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: e-waste-facility-locator
+    env: python
+    region: oregon
+    plan: free
+    branch: main
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn blogs.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: DEBUG
+        value: False
+      - key: DATABASE_URL
+        sync: false

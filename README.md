@@ -3,11 +3,14 @@
 <div align="center">
 
 ![Django](https://img.shields.io/badge/Django-5.2.4-green?style=for-the-badge&logo=django)
-![Python](https://img.shields.io/badge/Python-3.13-blue?style=for-the-badge&logo=python)
+![Python](https://img.shields.io/badge/Python-3.11.9-blue?style=for-the-badge&logo=python)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Live-success?style=for-the-badge)
+![Deployment](https://img.shields.io/badge/Deployed%20on-Render-46E3B7?style=for-the-badge&logo=render)
 
 **Smart Automation for Responsible E-Waste Management**
+
+🌐 **[View Live Application](https://e-waste-facility-locator-zy4a.onrender.com)** 🌐
 
 [Features](#-features) • [Demo](#-demo) • [Installation](#-installation) • [Usage](#-usage) • [Documentation](#-documentation) • [Contributing](#-contributing)
 
@@ -48,7 +51,9 @@ The **E-Waste Facility Locator** is a comprehensive Django-based web application
 
 ### 🎬 Demo
 
-🔗 **Live Demo**: [Coming Soon]
+🔗 **Live Demo**: **[https://e-waste-facility-locator-zy4a.onrender.com](https://e-waste-facility-locator-zy4a.onrender.com)**
+
+> **Note**: The app is hosted on Render's free tier. Initial load may take 30-60 seconds as the server spins up from sleep mode.
 
 📹 **Video Walkthrough**: [YouTube Link]
 
@@ -358,17 +363,39 @@ coverage html  # Generate HTML report
 
 ## 🌐 Deployment
 
+### 🚀 Currently Deployed On
+
+**Platform**: Render.com  
+**Live URL**: [https://e-waste-facility-locator-zy4a.onrender.com](https://e-waste-facility-locator-zy4a.onrender.com)  
+**Database**: PostgreSQL (Render-hosted)  
+**Python Version**: 3.11.9  
+**Status**: ✅ Live
+
 ### Production Checklist
 
-- [ ] Update `SECRET_KEY` in settings.py
-- [ ] Set `DEBUG = False`
-- [ ] Configure `ALLOWED_HOSTS`
-- [ ] Use PostgreSQL/MySQL instead of SQLite
-- [ ] Set up static files with WhiteNoise or CDN
+- [x] Update `SECRET_KEY` in settings.py
+- [x] Set `DEBUG = False`
+- [x] Configure `ALLOWED_HOSTS`
+- [x] Use PostgreSQL instead of SQLite
+- [x] Set up static files with WhiteNoise
+- [x] Configure environment variables
 - [ ] Configure email backend for notifications
-- [ ] Enable HTTPS/SSL
+- [ ] Enable custom domain with HTTPS/SSL
 - [ ] Set up logging and monitoring
-- [ ] Configure environment variables
+
+### Deploy to Render (Your Own Instance)
+
+See detailed step-by-step guide in `RENDER_DEPLOYMENT.md`.
+
+**Quick Steps:**
+1. Push your code to GitHub
+2. Create new Web Service on Render
+3. Connect your GitHub repository
+4. Set build command: `./build.sh`
+5. Set start command: `gunicorn blogs.wsgi:application`
+6. Add environment variables (SECRET_KEY, DEBUG, DATABASE_URL)
+7. Create PostgreSQL database and link it
+8. Deploy!
 
 ### Deploy to Heroku
 
@@ -392,9 +419,9 @@ heroku run python manage.py migrate
 heroku run python manage.py createsuperuser
 ```
 
-### Deploy to Railway/Render
+### Deploy to Railway
 
-See detailed deployment guide in `E_WASTE_PROJECT_REPORT.md` Section 9.
+See detailed deployment guide in `DEPLOYMENT_GUIDE.md`.
 
 ---
 
