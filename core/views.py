@@ -15,10 +15,21 @@ def home(request):
     Landing page with overview and call-to-action buttons
     Shows statistics and featured information
     """
+    try:
+        total_facilities = Facility.objects.count()
+        total_devices = Device.objects.count()
+        total_users = UserProfile.objects.count()
+    except Exception as e:
+        # If database tables don't exist yet, use default values
+        print(f"Warning: Could not fetch counts from database: {e}")
+        total_facilities = 0
+        total_devices = 0
+        total_users = 0
+    
     context = {
-        'total_facilities': Facility.objects.count(),
-        'total_devices': Device.objects.count(),
-        'total_users': UserProfile.objects.count(),
+        'total_facilities': total_facilities,
+        'total_devices': total_devices,
+        'total_users': total_users,
     }
     return render(request, 'core/home.html', context)
 
