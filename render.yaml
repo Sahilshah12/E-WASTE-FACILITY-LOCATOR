@@ -6,7 +6,7 @@ services:
     region: oregon
     plan: free
     branch: main
-    buildCommand: "pip install --upgrade pip && pip install -r requirements.txt && python manage.py collectstatic --no-input --clear && python manage.py migrate --noinput"
+    buildCommand: "./build.sh"
     startCommand: "gunicorn blogs.wsgi:application --log-file -"
     envVars:
       - key: PYTHON_VERSION
