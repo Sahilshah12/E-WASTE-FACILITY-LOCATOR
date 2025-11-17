@@ -1,0 +1,41 @@
+{% extends 'RPL/base.html' %}
+
+{% block title %}My Dashboard - RPL{% endblock %}
+
+{% block content %}
+<h2>My Dashboard</h2>
+<p>Welcome, {{ user.get_full_name|default:user.username }}!</p>
+<p>Email: {{ user.email }}</p>
+<p style="background: #d4edda; padding: 10px;"><strong>Session Active</strong> - You remain logged in across all pages</p>
+
+<hr>
+<h3>Statistics</h3>
+<p><strong>Total Feedbacks Submitted:</strong> {{ total_feedbacks }}</p>
+<p><a href="{% url 'RPL:feedback' %}"><button>Submit New Feedback</button></a></p>
+
+<hr>
+<h3>My Feedback History</h3>
+{% if user_feedbacks %}
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Rating</th>
+                <th>Comments</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for feedback in user_feedbacks %}
+            <tr>
+                <td>{{ feedback.created_at|date:"M d, Y - H:i" }}</td>
+                <td>{{ feedback.rating }}/5 ⭐</td>
+                <td>{{ feedback.comments|truncatewords:30 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>You haven't submitted any feedback yet.</p>
+    <a href="{% url 'RPL:feedback' %}"><button>Submit Your First Feedback</button></a>
+{% endif %}
+{% endblock %}

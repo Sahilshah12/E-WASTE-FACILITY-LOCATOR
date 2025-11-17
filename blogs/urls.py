@@ -19,6 +19,10 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('contact/', include('contact.urls')),
+    # path('contact/', include('contact.urls')),
+    # path('students/', include('form.urls')),  # Student management
     path('', include('core.urls')),  # E-Waste Locator routes
+    # path('', include('weather.urls')),  # Weather app
+    # path('', include('RPL.urls')),  # RPL Feedback System with Session Auth
 ]
+

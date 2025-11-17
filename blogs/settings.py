@@ -30,6 +30,29 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 # Allow all hosts for Render deployment
 ALLOWED_HOSTS = ['*']
 
+# Log errors to console in production
+if not DEBUG:
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'console': {
+                'class': 'logging.StreamHandler',
+            },
+        },
+        'root': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+        'loggers': {
+            'django': {
+                'handlers': ['console'],
+                'level': 'INFO',
+                'propagate': False,
+            },
+        },
+    }
+
 
 # Application definition
 
@@ -40,10 +63,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'contact',
-    'school',
-    'app',
+    # 'contact',
+    # 'school',
+    # 'app',
     'core',
+    # 'form',
+    # 'weather',
+    # 'RPL',
 ]
 
 MIDDLEWARE = [
@@ -62,7 +88,7 @@ ROOT_URLCONF = 'blogs.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -1,0 +1,43 @@
+{% extends 'RPL/base.html' %}
+
+{% block title %}Login - RPL Feedback System{% endblock %}
+
+{% block content %}
+<h2>Login</h2>
+<p>Login to access your account and submit feedback</p>
+<p style="background: #d1ecf1; padding: 10px;"><strong>Session-based Authentication:</strong> Once logged in, you'll remain authenticated across multiple pages during your browsing session.</p>
+
+<form method="post">
+    {% csrf_token %}
+    
+    {% if form.non_field_errors %}
+        <p style="color: red;">{{ form.non_field_errors }}</p>
+    {% endif %}
+    
+    <p>
+        <label>{{ form.username.label }}</label><br>
+        {{ form.username }}
+        {% if form.username.errors %}
+            <br><span style="color: red;">{{ form.username.errors }}</span>
+        {% endif %}
+    </p>
+    
+    <p>
+        <label>{{ form.password.label }}</label><br>
+        {{ form.password }}
+        {% if form.password.errors %}
+            <br><span style="color: red;">{{ form.password.errors }}</span>
+        {% endif %}
+    </p>
+    
+    <p>
+        <input type="checkbox" name="remember_me" id="remember_me">
+        <label for="remember_me">Keep me logged in (2 weeks)</label>
+    </p>
+    
+    <button type="submit">Login</button>
+</form>
+
+<hr>
+<p>Don't have an account? <a href="{% url 'RPL:register' %}">Register here</a></p>
+{% endblock %}

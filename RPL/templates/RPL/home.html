@@ -1,0 +1,35 @@
+{% extends 'RPL/base.html' %}
+
+{% block title %}Home - RPL Feedback System{% endblock %}
+
+{% block content %}
+<h1>Welcome to RPL Feedback System</h1>
+<p>We value your feedback! Help us improve our services.</p>
+
+{% if user.is_authenticated %}
+    <p style="background: #d4edda; padding: 10px;">You are logged in as <strong>{{ user.username }}</strong><br>
+    Session-based authentication keeps you logged in across pages</p>
+    <a href="{% url 'RPL:feedback' %}"><button>Submit Feedback</button></a>
+{% else %}
+    <p style="background: #d1ecf1; padding: 10px;">Please log in to submit feedback</p>
+    <a href="{% url 'RPL:login' %}"><button>Login</button></a>
+    <a href="{% url 'RPL:register' %}"><button>Register</button></a>
+{% endif %}
+
+<hr>
+<h2>Statistics</h2>
+<p><strong>Total Feedbacks:</strong> {{ total_feedbacks }}</p>
+<p><strong>Average Rating:</strong> {{ avg_rating }} / 5</p>
+
+{% if recent_feedbacks %}
+<hr>
+<h2>Recent Feedbacks</h2>
+{% for feedback in recent_feedbacks %}
+    <div style="border: 1px solid #ddd; padding: 10px; margin: 10px 0;">
+        <strong>{{ feedback.name }}</strong> - Rating: {{ feedback.rating }}/5 ⭐<br>
+        <small>{{ feedback.created_at|date:"M d, Y" }}</small>
+        <p>{{ feedback.comments|truncatewords:20 }}</p>
+    </div>
+{% endfor %}
+{% endif %}
+{% endblock %}

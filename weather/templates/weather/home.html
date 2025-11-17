@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f7f7f7;
+            text-align: center;
+            padding: 40px;
+        }
+        .box {
+            background: white;
+            padding: 20px;
+            width: 400px;
+            margin: auto;
+            border-radius: 12px;
+            box-shadow: 0 0 10px #ccc;
+        }
+        input {
+            padding: 10px;
+            width: 70%;
+            border: 2px solid #333;
+            border-radius: 6px;
+        }
+        button {
+            padding: 10px;
+            width: 20%;
+            background: black;
+            color: white;
+            border-radius: 6px;
+            border: none;
+        }
+        img {
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🌤 Weather App</h1>
+
+    <div class="box">
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="city" placeholder="Enter city name" required>
+            <button type="submit">Search</button>
+        </form>
+
+        <br>
+
+        {% if weather %}
+            {% if weather.error %}
+                <p style="color:red;">{{ weather.error }}</p>
+            {% else %}
+                <h2>{{ weather.city }}</h2>
+                <img src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png">
+                <p><strong>Temperature:</strong> {{ weather.temperature }} °C</p>
+                <p><strong>Humidity:</strong> {{ weather.humidity }} %</p>
+                <p><strong>Description:</strong> {{ weather.description }}</p>
+            {% endif %}
+        {% endif %}
+    </div>
+
+</body>
+</html>

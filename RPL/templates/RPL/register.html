@@ -1,0 +1,69 @@
+{% extends 'RPL/base.html' %}
+
+{% block title %}Feedback System{% endblock %}
+
+{% block content %}
+<h2>Create Account</h2>
+
+<form method="post">
+    {% csrf_token %}
+    
+    {% if form.non_field_errors %}
+        <p style="color: red;">{{ form.non_field_errors }}</p>
+    {% endif %}
+    
+    <p>
+        <label>{{ form.username.label }}</label><br>
+        {{ form.username }}
+        {% if form.username.errors %}
+            <br><span style="color: red;">{{ form.username.errors }}</span>
+        {% endif %}
+    </p>
+    
+    <p>
+        <label>{{ form.first_name.label }}</label><br>
+        {{ form.first_name }}
+        {% if form.first_name.errors %}
+            <br><span style="color: red;">{{ form.first_name.errors }}</span>
+        {% endif %}
+    </p>
+    
+    <p>
+        <label>{{ form.last_name.label }}</label><br>
+        {{ form.last_name }}
+        {% if form.last_name.errors %}
+            <br><span style="color: red;">{{ form.last_name.errors }}</span>
+        {% endif %}
+    </p>
+    
+    <p>
+        <label>{{ form.email.label }}</label><br>
+        {{ form.email }}
+        {% if form.email.errors %}
+            <br><span style="color: red;">{{ form.email.errors }}</span>
+        {% endif %}
+    </p>
+    
+    <p>
+        <label>{{ form.password1.label }}</label><br>
+        {{ form.password1 }}
+        {% if form.password1.errors %}
+            <br><span style="color: red;">{{ form.password1.errors }}</span>
+        {% endif %}
+        <br><small>Password must be at least 8 characters</small>
+    </p>
+    
+    <p>
+        <label>{{ form.password2.label }}</label><br>
+        {{ form.password2 }}
+        {% if form.password2.errors %}
+            <br><span style="color: red;">{{ form.password2.errors }}</span>
+        {% endif %}
+    </p>
+    
+    <button type="submit">Register</button>
+</form>
+
+<hr>
+<p>Already have an account? <a href="{% url 'RPL:login' %}">Login here</a></p>
+{% endblock %}

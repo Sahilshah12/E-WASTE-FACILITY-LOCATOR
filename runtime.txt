@@ -1,1 +1,25 @@
 python-3.11.9
+
+for creating new app
+C:\Django\env\Scripts\Activate.ps1; python manage.py startapp form
+
+
+
+python manage.py makemigrations
+python manage.py migrate
+
+
+
+
+1-a-Your website display a list of products. Implement cookies-based navigation to remember the user's 
+last viewed product. When user return to the website , they should be redirected to the last product they viewed.
+b-Devlop a page where user can select their preferred background color from the dropdown menu . 
+Implement cookies to remember the users choice, so the next time they visit the website , the 
+background color remains the same in the dropdown menu.
+
+4-a-Your website wants to display weather forecasts for different locations. Design a static templates to show current
+ weather condition , temperatures , and forecasts for the upcoming days.
+ b- your website needs to simulate weather data without relying on an external API. Devlope a functionality where the website 
+ generates mock weather data and displays it to users.
+ 
+5-a-You're devloping a todo list application .Define Django models 

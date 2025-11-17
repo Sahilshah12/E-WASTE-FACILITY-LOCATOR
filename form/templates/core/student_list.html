@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head><title>Students</title></head>
+<body>
+  <h1>Students</h1>
+  <a href="{% url 'student_create' %}">Add new student</a>
+  <ul>
+    {% for s in students %}
+      <li>{{ s.name }} — {{ s.email }} — {{ s.course.name }} — {{ s.marks }}</li>
+    {% empty %}
+      <li>No students found.</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

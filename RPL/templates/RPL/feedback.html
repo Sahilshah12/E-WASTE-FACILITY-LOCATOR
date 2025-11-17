@@ -1,0 +1,53 @@
+{% extends 'RPL/base.html' %}
+
+{% block title %}Submit Feedback - RPL{% endblock %}
+
+{% block content %}
+<h2>Submit Your Feedback</h2>
+<p style="background: #d4edda; padding: 10px;">You are logged in</p>
+
+<form method="post">
+    {% csrf_token %}
+    
+    <p>
+        <label><strong>{{ form.name.label }} *</strong></label><br>
+        {{ form.name }}
+        {% if form.name.errors %}
+            <br><span style="color: red;">{{ form.name.errors }}</span>
+        {% endif %}
+        
+    </p>
+    
+    <p>
+        <label><strong>{{ form.email.label }} *</strong></label><br>
+        {{ form.email }}
+        {% if form.email.errors %}
+            <br><span style="color: red;">{{ form.email.errors }}</span>
+        {% endif %}
+        
+    </p>
+    
+    <p>
+        <label><strong>{{ form.rating.label }} *</strong></label><br>
+        {% for radio in form.rating %}
+            {{ radio.tag }} {{ radio.choice_label }}<br>
+        {% endfor %}
+        {% if form.rating.errors %}
+            <span style="color: red;">{{ form.rating.errors }}</span>
+        {% endif %}
+    </p>
+    
+    <p>
+        <label><strong>{{ form.comments.label }} *</strong></label><br>
+        {{ form.comments }}
+        {% if form.comments.errors %}
+            <br><span style="color: red;">{{ form.comments.errors }}</span>
+        {% endif %}
+    </p>
+    
+    <button type="submit">Submit Feedback</button>
+    <a href="{% url 'RPL:home' %}"><button type="button">Cancel</button></a>
+</form>
+
+
+{% endblock %}

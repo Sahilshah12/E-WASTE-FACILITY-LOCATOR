@@ -1,0 +1,51 @@
+{% extends 'RPL/base.html' %}
+
+{% block title %}All Feedbacks - Admin View{% endblock %}
+
+{% block content %}
+<h2>Feedback Analysis Dashboard (Admin)</h2>
+
+<h3>Statistics</h3>
+<p><strong>Total Feedbacks:</strong> {{ stats.total }}</p>
+<p><strong>Average Rating:</strong> {{ stats.avg_rating|floatformat:1 }} / 5</p>
+
+<h4>Rating Distribution</h4>
+<ul>
+    {% for rating, count in stats.rating_distribution.items %}
+        <li>{{ rating }} stars: {{ count }}</li>
+    {% endfor %}
+</ul>
+
+<hr>
+<h3>All User Feedbacks</h3>
+{% if feedbacks %}
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>User</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Rating</th>
+                <th>Comments</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for feedback in feedbacks %}
+            <tr>
+                <td>{{ feedback.id }}</td>
+                <td>{% if feedback.user %}{{ feedback.user.username }}{% else %}Anonymous{% endif %}</td>
+                <td>{{ feedback.name }}</td>
+                <td>{{ feedback.email }}</td>
+                <td>{{ feedback.rating }}/5 ⭐</td>
+                <td>{{ feedback.comments|truncatewords:15 }}</td>
+                <td>{{ feedback.created_at|date:"M d, Y H:i" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No feedbacks submitted yet.</p>
+{% endif %}
+{% endblock %}

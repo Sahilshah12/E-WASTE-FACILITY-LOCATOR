@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head><title>Add Student</title></head>
+<body>
+  <h1>Add Student</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <table>
+      {{ form.as_table }}
+    </table>
+    <button type="submit">Save</button>
+  </form>
+  <a href="{% url 'student_list' %}">Back to list</a>
+</body>
+</html>
